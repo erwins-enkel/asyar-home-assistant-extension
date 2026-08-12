@@ -1,7 +1,7 @@
 {
   "id": "org.erwinsenkel.home-assistant",
   "name": "Home Assistant",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Search and control Home Assistant entities from the launcher, activate scenes, and expose your smart home to Asyar's AI agents.",
   "author": "Erwins Enkel",
   "icon": "\ud83c\udfe0",

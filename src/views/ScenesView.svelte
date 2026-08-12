@@ -327,6 +327,7 @@
     white-space: nowrap;
   }
   .ha-id {
+    font-family: var(--font-mono, ui-monospace, 'SF Mono', Consolas, monospace);
     font-size: var(--font-size-xs);
     color: var(--text-secondary);
     overflow: hidden;

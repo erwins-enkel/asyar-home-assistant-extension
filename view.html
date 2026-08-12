@@ -4,6 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Assistant</title>
+    <style>
+      /*
+       * The host injects @font-face for Satoshi and forwards --font-ui /
+       * --font-mono, but applies neither — an iframe that sets no font-family
+       * falls back to the browser default, which is a serif on macOS. The
+       * literal fallback stack covers the gap before the theme variables
+       * arrive, since they are pushed after load.
+       */
+      html,
+      body {
+        font-family: var(
+          --font-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          system-ui,
+          'Helvetica Neue',
+          sans-serif
+        );
+        font-size: var(--font-size-base, 14px);
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

@@ -1,6 +1,6 @@
 {
   "name": "org.erwinsenkel.home-assistant",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Search and control Home Assistant entities from Asyar.",
   "type": "module",
   "private": true,
@@ -21,7 +21,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "keytar"
     ]
   },
   "dependencies": {
