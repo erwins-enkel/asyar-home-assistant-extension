@@ -4,6 +4,8 @@ Control your smart home from [Asyar](https://asyar.org) — type an entity name 
 launcher and hit Enter to toggle it, browse and filter everything, activate scenes, and
 let Asyar's AI agents read state and call services.
 
+![The Entities panel filtered to lights, showing state and a toggle per row](docs/entities.png)
+
 ## Quick control from the search bar
 
 With the launcher open, start typing:
