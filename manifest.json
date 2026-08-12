@@ -1,0 +1,135 @@
+{
+  "id": "org.erwinsenkel.home-assistant",
+  "name": "Home Assistant",
+  "version": "0.1.0",
+  "description": "Search and control Home Assistant entities from the launcher, activate scenes, and expose your smart home to Asyar's AI agents.",
+  "author": "Erwins Enkel",
+  "icon": "\ud83c\udfe0",
+  "type": "extension",
+  "asyarSdk": "^4.6.0",
+  "searchable": true,
+  "background": {
+    "main": "dist/worker.js"
+  },
+  "permissions": ["network", "preferences:read", "tools:register"],
+  "preferences": [
+    {
+      "name": "baseUrl",
+      "type": "textfield",
+      "title": "Home Assistant URL",
+      "required": true,
+      "placeholder": "https://homeassistant.example.ts.net",
+      "description": "Base URL of your Home Assistant instance, no trailing /api."
+    },
+    {
+      "name": "token",
+      "type": "password",
+      "title": "Long-lived access token",
+      "required": true,
+      "description": "Home Assistant \u2192 your profile \u2192 Security \u2192 Long-lived access tokens \u2192 Create token. Stored encrypted on this device and never synced."
+    },
+    {
+      "name": "searchDomains",
+      "type": "textfield",
+      "title": "Domains offered in global search",
+      "default": "light,switch,scene,script,input_boolean,fan,cover,media_player",
+      "description": "Comma-separated entity domains. Narrow this to keep the root search bar uncluttered."
+    },
+    {
+      "name": "minQueryLength",
+      "type": "number",
+      "title": "Minimum characters before searching",
+      "default": 3,
+      "description": "Below this, the extension contributes nothing to global search."
+    }
+  ],
+  "commands": [
+    {
+      "id": "entities",
+      "name": "Home Assistant Entities",
+      "description": "Browse, filter, and control every entity",
+      "icon": "\ud83c\udfe0",
+      "mode": "view",
+      "component": "EntitiesView"
+    },
+    {
+      "id": "scenes",
+      "name": "Home Assistant Scenes",
+      "description": "Activate a scene or run a script",
+      "icon": "\ud83c\udfac",
+      "mode": "view",
+      "component": "ScenesView"
+    },
+    {
+      "id": "refresh",
+      "name": "Refresh Home Assistant State",
+      "description": "Background refresh of the cached entity list",
+      "mode": "background",
+      "schedule": {
+        "intervalSeconds": 300
+      }
+    }
+  ],
+  "tools": [
+    {
+      "id": "ha-list-entities",
+      "name": "List Home Assistant entities",
+      "description": "List smart-home entities and their current state, optionally filtered by domain or a name fragment. Call when the user asks what devices exist, which lights are on, or what the state of a room is.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Optional entity domain to filter by, e.g. 'light', 'switch', 'sensor', 'climate'."
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional case-insensitive fragment matched against the entity's friendly name or id, e.g. 'kitchen'."
+          }
+        }
+      }
+    },
+    {
+      "id": "ha-get-state",
+      "name": "Get Home Assistant entity state",
+      "description": "Get the current state and attributes of one specific entity. Call when the user asks about a single device, sensor reading, or whether something is on.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "entityId": {
+            "type": "string",
+            "description": "Full entity id, e.g. 'light.kitchen_ceiling'. Use ha-list-entities first if you only know the friendly name."
+          }
+        },
+        "required": ["entityId"]
+      }
+    },
+    {
+      "id": "ha-call-service",
+      "name": "Call a Home Assistant service",
+      "description": "Control a device by calling a Home Assistant service, e.g. turn a light on or off, activate a scene, set a temperature. Confirm with the user before calling this for anything disruptive.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Service domain, e.g. 'light', 'switch', 'scene', 'climate'."
+          },
+          "service": {
+            "type": "string",
+            "description": "Service name within the domain, e.g. 'turn_on', 'turn_off', 'toggle', 'set_temperature'."
+          },
+          "entityId": {
+            "type": "string",
+            "description": "Target entity id, e.g. 'light.kitchen_ceiling'."
+          },
+          "data": {
+            "type": "object",
+            "description": "Optional extra service data, e.g. { \"brightness_pct\": 40 } or { \"temperature\": 21 }."
+          }
+        },
+        "required": ["domain", "service"]
+      }
+    }
+  ]
+}

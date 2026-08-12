@@ -1,0 +1,48 @@
+{
+  "name": "org.erwinsenkel.home-assistant",
+  "version": "0.1.0",
+  "description": "Search and control Home Assistant entities from Asyar.",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.26.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "validate": "asyar validate",
+    "link": "asyar link",
+    "package": "npm run build && zip -r extension.zip dist manifest.json",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "prepare": "husky"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "asyar-sdk": "^4.6.0",
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-svelte": "^3.22.0",
+    "globals": "^17.10.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-svelte": "^4.1.1",
+    "svelte-check": "^4.0.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.67.0",
+    "vite": "^6.0.0",
+    "vitest": "^2.1.0"
+  }
+}
